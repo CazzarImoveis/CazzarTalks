@@ -133,6 +133,16 @@ html{scroll-behavior:smooth}
 .ct-grole{font-size:.92rem;color:#D9DDE5}
 .ct-err{color:#F2B8A0;font-size:14px;min-height:20px}
 .ct-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.ct-tab{min-height:46px;border:0;border-radius:999px;background:transparent;color:#D9DDE5;font-family:Montserrat,sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:background-color .25s ease,color .25s ease}
+.ct-tab[aria-pressed="true"]{background:#D6A85B;color:#0B1F3B}
+.ct-tab:focus-visible{outline:2px solid #D6A85B;outline-offset:2px}
+.ct-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.ct-fld{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ct-fld label{font-family:Montserrat,sans-serif;font-weight:600;font-size:13px;color:#D9DDE5}
+.ct-inp{min-height:50px;box-sizing:border-box;width:100%;padding:0 16px;border-radius:12px;border:1px solid rgba(217,221,229,.22);background:#0B1F3B;color:#F4F1EA;font-family:Inter,sans-serif;font-size:15px}
+select.ct-inp{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23D6A85B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+select.ct-inp option{background:#0B1F3B;color:#F4F1EA}
+@media (max-width:760px){.ct-nav a:not(.ct-btn){display:none}}
 button.ct-gold:disabled{opacity:.6;cursor:wait}
 </style>
 </head>
@@ -149,6 +159,7 @@ button.ct-gold:disabled{opacity:.6;cursor:wait}
 <a href="#quadro" style="color: #D9DDE5; text-decoration: none">O quadro</a>
 <a href="#episodios" style="color: #D9DDE5; text-decoration: none">Episódios</a>
 <a href="#assistir" style="color: #D9DDE5; text-decoration: none">Assistir</a>
+<a href="#imoveis" style="color: #D9DDE5; text-decoration: none">Comprar ou vender</a>
 <a href="#convidado" class="ct-btn ct-gold" style="background: #D6A85B; color: #0B1F3B; text-decoration: none; padding: 12px 20px; border-radius: 999px; font-weight: 800">Seja convidado</a>
 </nav>
 </div>
@@ -351,6 +362,72 @@ Assistir agora
 </div>
 </section>
 
+<!-- IMÓVEIS: COMPRA E VENDA -->
+<section id="imoveis" class="ct-bg" style="position: relative; overflow: hidden; padding: 130px 24px; border-top: 1px solid rgba(214,168,91,0.16)">
+<div aria-hidden="true" class="ct-spin2" style="position: absolute; right: -300px; top: -200px; width: 800px; height: 800px; border-radius: 50%; border: 1px solid rgba(217,221,229,0.06); border-left-color: rgba(214,168,91,0.4)"></div>
+<div style="position: relative; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+<div class="ct-rv" style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<span style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.28em; color: #D6A85B">CAZZAR IMÓVEIS</span>
+<h2 style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(2.1rem, 4.4vw, 3.6rem); line-height: 1.05; letter-spacing: -0.01em; color: #F4F1EA">Quer comprar ou vender um imóvel?</h2>
+<p style="margin: 0; font-size: 1.1rem; line-height: 1.6; color: #D9DDE5; max-width: 460px">Imóveis de alto padrão em São José dos Campos. Conte o que você procura e um corretor fala com você.</p>
+</div>
+<form id="form-imovel" class="ct-rv2" novalidate style="flex: 1 1 460px; min-width: 0; background: rgba(22,52,95,0.88); border: 1px solid rgba(214,168,91,0.3); border-radius: 26px; padding: 32px; box-sizing: border-box">
+<div id="im-ok" class="ct-hide" role="status" style="display: flex; flex-direction: column; gap: 10px; padding: 32px 0">
+<span style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 1.5rem; color: #F4F1EA">Recebemos seu contato.</span>
+<span style="font-size: 1rem; line-height: 1.6; color: #D9DDE5">Um corretor da Cazzar Imóveis vai falar com você pelo WhatsApp informado.</span>
+</div>
+<div id="im-campos" style="display: flex; flex-direction: column; gap: 18px">
+<div role="group" aria-label="O que você quer fazer" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 6px; border-radius: 999px; background: #0B1F3B; border: 1px solid rgba(217,221,229,0.16)">
+<button type="button" class="ct-tab" data-tipo="Compra" aria-pressed="true">Quero comprar</button>
+<button type="button" class="ct-tab" data-tipo="Venda" aria-pressed="false">Quero vender</button>
+</div>
+<div class="ct-row">
+<div class="ct-fld"><label for="im-nome">Nome</label><input id="im-nome" class="ct-in ct-inp" type="text" autocomplete="name" maxlength="120" placeholder="Nome completo"></div>
+<div class="ct-fld"><label for="im-zap">WhatsApp</label><input id="im-zap" class="ct-in ct-inp" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="(12) 9 0000-0000"></div>
+</div>
+<div class="ct-row">
+<div class="ct-fld"><label for="im-tipo">Tipo de imóvel</label>
+<select id="im-tipo" class="ct-in ct-inp">
+<option value="">Selecione</option>
+<option>Casa em condomínio</option>
+<option>Casa</option>
+<option>Apartamento</option>
+<option>Terreno</option>
+<option>Comercial</option>
+</select></div>
+<div class="ct-fld"><label for="im-bairro" id="im-bairro-lbl">Bairro ou região de interesse</label><input id="im-bairro" class="ct-in ct-inp" type="text" maxlength="120" placeholder="Ex.: Jardim Aquarius, Urbanova"></div>
+</div>
+<div class="ct-fld" id="im-faixa-box"><label for="im-faixa">Faixa de valor</label>
+<select id="im-faixa" class="ct-in ct-inp">
+<option value="">Selecione</option>
+<option>Até R$ 500 mil</option>
+<option>R$ 500 mil a R$ 1 milhão</option>
+<option>R$ 1 a 2 milhões</option>
+<option>R$ 2 a 4 milhões</option>
+<option>Acima de R$ 4 milhões</option>
+</select></div>
+<div class="ct-fld ct-hide" id="im-valor-box"><label for="im-valor">Valor pretendido (opcional)</label><input id="im-valor" class="ct-in ct-inp" type="text" inputmode="numeric" maxlength="40" placeholder="Ex.: R$ 1.800.000"></div>
+<div class="ct-fld"><label for="im-msg" id="im-msg-lbl">Algo mais? (opcional)</label><textarea id="im-msg" class="ct-in ct-inp" rows="3" maxlength="600" placeholder="Quartos, vagas, prazo, o que for importante" style="padding-top: 14px; resize: vertical"></textarea></div>
+<div class="ct-fld"><label for="im-conheceu">Como conheceu a Cazzar?</label>
+<select id="im-conheceu" class="ct-in ct-inp">
+<option value="">Selecione</option>
+<option>Escola parceira</option>
+<option>Academia parceira</option>
+<option>Instagram</option>
+<option>YouTube / Cazzar Talks</option>
+<option>Indicação de amigo</option>
+<option>Google</option>
+<option>Outro</option>
+</select></div>
+<div class="ct-hp" aria-hidden="true"><label for="im-site">Site</label><input id="im-site" type="text" tabindex="-1" autocomplete="off"></div>
+<p id="im-erro" class="ct-err" role="alert" style="margin: 0"></p>
+<button id="im-btn" type="submit" class="ct-btn ct-gold" style="min-height: 56px; border: 0; border-radius: 999px; background: #D6A85B; color: #0B1F3B; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 15px; cursor: pointer">Quero comprar</button>
+<p style="margin: 0; font-size: 12px; line-height: 1.5; color: #A9B2C3; text-align: center">Ao enviar, você autoriza a Cazzar Imóveis a entrar em contato. CRECI 43352J.</p>
+</div>
+</form>
+</div>
+</section>
+
 <!-- SEJA CONVIDADO -->
 <section id="convidado" style="position: relative; overflow: hidden; padding: 130px 24px; background: #0B1F3B">
 <div aria-hidden="true" class="ct-spin" style="position: absolute; left: 50%; top: 50%; width: 1100px; height: 1100px; margin: -550px 0 0 -550px; border-radius: 50%; border: 1px solid rgba(217,221,229,0.05); border-top-color: rgba(214,168,91,0.35)"></div>
@@ -485,18 +562,20 @@ Assistir agora
       $('prox-nome').textContent = site.proximo_convidado;
       $('prox-desc').textContent = [site.proximo_cargo, site.proximo_tema].filter(Boolean).join(' · ');
       if (site.proximo_data) { $('prox-data').textContent = 'Estreia · ' + site.proximo_data; $('prox-data').classList.remove('ct-hide'); }
-      var foto = img(site.proximo_foto) || (ytId(site.proximo_link) ? 'https://i.ytimg.com/vi/' + ytId(site.proximo_link) + '/hqdefault.jpg' : '');
-      if (foto) {
-        $('prox-foto').onerror = function () {
-          this.classList.add('ct-hide'); $('prox-sombra').classList.add('ct-hide'); $('prox-logo').classList.remove('ct-hide');
-        };
-        $('prox-foto').src = foto; $('prox-foto').alt = site.proximo_convidado;
-        $('prox-foto').classList.remove('ct-hide'); $('prox-sombra').classList.remove('ct-hide');
-        $('prox-logo').classList.add('ct-hide');
-      }
+    }
+    var foto = img(site.proximo_foto) || (ytId(site.proximo_link) ? 'https://i.ytimg.com/vi/' + ytId(site.proximo_link) + '/hqdefault.jpg' : '');
+    if (foto) {
+      $('prox-foto').onerror = function () {
+        var d = this.src.match(/thumbnail\?id=([A-Za-z0-9_-]+)/);
+        if (d && !this.dataset.alt) { this.dataset.alt = 1; this.src = 'https://lh3.googleusercontent.com/d/' + d[1] + '=w1600'; return; }
+        this.classList.add('ct-hide'); $('prox-sombra').classList.add('ct-hide'); $('prox-logo').classList.remove('ct-hide');
+      };
+      $('prox-foto').src = foto; $('prox-foto').alt = (site.proximo_convidado || 'Próximo episódio do Cazzar Talks');
+      $('prox-foto').classList.remove('ct-hide');
+      $('prox-logo').classList.add('ct-hide');
     }
     var link = seguro(site.proximo_link);
-    if (link) { $('prox-link').href = link; $('prox-play').classList.remove('ct-hide'); }
+    if (link) { $('prox-link').href = link; $('prox-play').classList.remove('ct-hide'); if (foto) $('prox-sombra').classList.remove('ct-hide'); }
     else { $('prox-link').removeAttribute('href'); }
 
     // galeria
@@ -511,7 +590,7 @@ Assistir agora
         if (url) { el.href = url; el.target = '_blank'; el.rel = 'noopener'; }
         var capa = img(g.foto) || (ytId(g.link) ? 'https://i.ytimg.com/vi/' + ytId(g.link) + '/hqdefault.jpg' : 'compartilhar.jpg');
         var fig = document.createElement('div'); fig.className = 'ct-gimg';
-        var im = document.createElement('img'); im.onerror = function () { this.onerror = null; this.src = 'compartilhar.jpg'; }; im.src = capa; im.alt = g.nome; im.loading = 'lazy';
+        var im = document.createElement('img'); im.onerror = function () { var d = this.src.match(/thumbnail\?id=([A-Za-z0-9_-]+)/); if (d && !this.dataset.alt) { this.dataset.alt = 1; this.src = 'https://lh3.googleusercontent.com/d/' + d[1] + '=w1600'; return; } this.onerror = null; this.src = 'compartilhar.jpg'; }; im.src = capa; im.alt = g.nome; im.loading = 'lazy';
         fig.appendChild(im);
         var tx = document.createElement('div'); tx.className = 'ct-gtxt';
         var n = document.createElement('span'); n.className = 'ct-gname'; n.textContent = g.nome;
@@ -560,11 +639,81 @@ Assistir agora
     if (!CONFIG.planilhaURL) { ok(); return; }
     fetch(CONFIG.planilhaURL, {
       method: 'POST', mode: 'no-cors',
-      body: new URLSearchParams({ nome: nome, area: area, whatsapp: zap, site: '' })
+      body: new URLSearchParams({ nome: nome, area: area, whatsapp: zap, origem: origem || 'Site direto', site: '' })
     }).then(ok).catch(function () {
       btn.disabled = false; btn.textContent = 'Enviar indicação';
       erro.textContent = 'Não foi possível enviar agora. Tente de novo em instantes.';
     });
+  });
+
+
+  /* ---------- origem (QR code de parceiro) ---------- */
+  var ROTULOS = { escola: 'Escola parceira', academia: 'Academia parceira' };
+  var origem = '';
+  try {
+    var q = new URLSearchParams(location.search).get('origem');
+    if (q) { origem = q.slice(0, 60); localStorage.setItem('ct_origem', JSON.stringify({ v: origem, t: Date.now() })); }
+    else {
+      var salvo = JSON.parse(localStorage.getItem('ct_origem') || 'null');
+      if (salvo && Date.now() - salvo.t < 90 * 864e5) origem = salvo.v;
+    }
+  } catch (e) {}
+  if (origem) {
+    var base = origem.split('-')[0].toLowerCase();
+    var rot = ROTULOS[base];
+    if (rot) $('im-conheceu').value = rot;
+  }
+  /* ---------- formulário compra / venda ---------- */
+  var tipoAtual = 'Compra';
+  function escolher(t) {
+    tipoAtual = t;
+    document.querySelectorAll('.ct-tab').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-tipo') === t ? 'true' : 'false'); });
+    var venda = t === 'Venda';
+    $('im-faixa-box').classList.toggle('ct-hide', venda);
+    $('im-valor-box').classList.toggle('ct-hide', !venda);
+    $('im-bairro-lbl').textContent = venda ? 'Bairro ou condomínio do imóvel' : 'Bairro ou região de interesse';
+    $('im-msg-lbl').textContent = venda ? 'Conte sobre o imóvel (opcional)' : 'Algo mais? (opcional)';
+    $('im-msg').placeholder = venda ? 'Metragem, quartos, se está ocupado, prazo' : 'Quartos, vagas, prazo, o que for importante';
+    $('im-btn').textContent = venda ? 'Quero vender' : 'Quero comprar';
+    $('im-erro').textContent = '';
+  }
+  document.querySelectorAll('.ct-tab').forEach(function (b) {
+    b.addEventListener('click', function () { escolher(b.getAttribute('data-tipo')); });
+  });
+  if (location.hash === '#vender') escolher('Venda');
+
+  $('form-imovel').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var erro = $('im-erro');
+    var d = {
+      tipo: tipoAtual,
+      nome: $('im-nome').value.trim(),
+      whatsapp: $('im-zap').value.trim(),
+      imovel: $('im-tipo').value,
+      bairro: $('im-bairro').value.trim(),
+      valor: tipoAtual === 'Venda' ? $('im-valor').value.trim() : $('im-faixa').value,
+      mensagem: $('im-msg').value.trim(),
+      conheceu: $('im-conheceu').value,
+      origem: origem || 'Site direto',
+      site: ''
+    };
+    if (!d.nome || d.whatsapp.replace(/\D/g, '').length < 10 || !d.imovel) {
+      erro.textContent = 'Preencha nome, WhatsApp com DDD e o tipo de imóvel.';
+      return;
+    }
+    if ($('im-site').value) return; // robô
+    erro.textContent = '';
+    var btn = $('im-btn'); var txt = btn.textContent; btn.disabled = true; btn.textContent = 'Enviando…';
+    function ok() {
+      $('im-campos').classList.add('ct-hide'); $('im-ok').classList.remove('ct-hide');
+      pixel('Lead', { content_name: tipoAtual === 'Venda' ? 'Quero vender' : 'Quero comprar', content_category: origem || 'Site direto' });
+    }
+    if (!CONFIG.planilhaURL) { ok(); return; }
+    fetch(CONFIG.planilhaURL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(d) })
+      .then(ok).catch(function () {
+        btn.disabled = false; btn.textContent = txt;
+        erro.textContent = 'Não foi possível enviar agora. Tente de novo em instantes.';
+      });
   });
 })();
 </script>
